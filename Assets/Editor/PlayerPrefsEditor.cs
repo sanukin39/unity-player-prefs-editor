@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerPrefsEditor : EditorWindow {
 
     string stringKey = "";
+    string stringData = "";
     string intKey = "";
     string floatKey = "";
 
@@ -25,6 +26,12 @@ public class PlayerPrefsEditor : EditorWindow {
         if(PlayerPrefs.HasKey(stringKey)){
             string data = PlayerPrefs.GetString(stringKey);
             GUILayout.Label(data);
+            if(GUILayout.Button("Edit")){
+                DataEditor.dataType = "string";
+                DataEditor.dataKey = stringKey;
+                DataEditor.originalData = data;
+                EditorWindow.GetWindow<DataEditor>("DataEditor");
+            }
         }
 
         GUILayout.Label("Int Value");
@@ -32,6 +39,12 @@ public class PlayerPrefsEditor : EditorWindow {
         if(PlayerPrefs.HasKey(intKey)){
             string data = PlayerPrefs.GetInt(intKey).ToString();
             GUILayout.Label(data);
+            if(GUILayout.Button("Edit")){
+                DataEditor.dataType = "int";
+                DataEditor.dataKey = stringKey;
+                DataEditor.originalData = data;
+                EditorWindow.GetWindow<DataEditor>("DataEditor");
+            }
         }
 
         GUILayout.Label("Float Value");
@@ -39,6 +52,12 @@ public class PlayerPrefsEditor : EditorWindow {
         if(PlayerPrefs.HasKey(floatKey)){
             string data = PlayerPrefs.GetFloat(floatKey).ToString();
             GUILayout.Label(data);
+            if(GUILayout.Button("Edit")){
+                DataEditor.dataType = "float";
+                DataEditor.dataKey = stringKey;
+                DataEditor.originalData = data;
+                EditorWindow.GetWindow<DataEditor>("DataEditor");
+            }
         }
     }
 }
