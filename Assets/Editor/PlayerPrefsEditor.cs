@@ -1,10 +1,11 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using System;
 
 public class PlayerPrefsEditor : EditorWindow {
 
     string stringKey = "";
-    string stringData = "";
+    //string stringData = "";
     string intKey = "";
     string floatKey = "";
 
@@ -27,10 +28,7 @@ public class PlayerPrefsEditor : EditorWindow {
             string data = PlayerPrefs.GetString(stringKey);
             GUILayout.Label(data);
             if(GUILayout.Button("Edit")){
-                DataEditor.dataType = "string";
-                DataEditor.dataKey = stringKey;
-                DataEditor.originalData = data;
-                EditorWindow.GetWindow<DataEditor>("DataEditor");
+                OpenEditor("string", stringKey, data);
             }
         }
 
@@ -40,10 +38,7 @@ public class PlayerPrefsEditor : EditorWindow {
             string data = PlayerPrefs.GetInt(intKey).ToString();
             GUILayout.Label(data);
             if(GUILayout.Button("Edit")){
-                DataEditor.dataType = "int";
-                DataEditor.dataKey = stringKey;
-                DataEditor.originalData = data;
-                EditorWindow.GetWindow<DataEditor>("DataEditor");
+                OpenEditor("int", intKey, data);
             }
         }
 
@@ -53,11 +48,15 @@ public class PlayerPrefsEditor : EditorWindow {
             string data = PlayerPrefs.GetFloat(floatKey).ToString();
             GUILayout.Label(data);
             if(GUILayout.Button("Edit")){
-                DataEditor.dataType = "float";
-                DataEditor.dataKey = stringKey;
-                DataEditor.originalData = data;
-                EditorWindow.GetWindow<DataEditor>("DataEditor");
+                OpenEditor("float", floatKey, data);
             }
         }
+    }
+
+    void OpenEditor(string type, string key, string data){
+        DataEditor.dataType = type;
+        DataEditor.dataKey = key;
+        DataEditor.originalData = data;
+        EditorWindow.GetWindow<DataEditor>("DataEditor");
     }
 }
